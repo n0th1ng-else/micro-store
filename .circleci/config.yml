@@ -31,6 +31,7 @@ commands:
           path: test-report
 
 jobs:
+  version: 2.1
   semantic_release_pr:
     executor: node_executor
     steps:
