@@ -1,4 +1,9 @@
 version: 2.1
+executors:
+  node_executor:
+    docker:
+      - image: circleci/node:10.15.3-browsers
+
 commands:
   install_dependencies:
     description: 'Checkout, install and cache npm dependencies'
@@ -27,8 +32,7 @@ commands:
 
 jobs:
   semantic_release_pr:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
       - run:
@@ -39,10 +43,11 @@ jobs:
           command: npx semantic-release --dry-run --branch $CIRCLE_BRANCH | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
+    post-steps:
+      - run: ./.circleci/aggregator.js
 
   semantic_release_master:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
       - run:
@@ -53,16 +58,18 @@ jobs:
           command: npx semantic-release | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
+    post-steps:
+      - run: ./.circleci/aggregator.js
 
   run_unit_tests:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - run_tests
+    post-steps:
+      - run: ./.circleci/aggregator.js
 
   github_comment:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
       - run: ./.circleci/bot.js
