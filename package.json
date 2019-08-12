@@ -1,5 +1,5 @@
 {
-  "name": "micro-store",
+  "name": "minimal-store",
   "version": "0.0.0-semantically-released",
   "description": "Tiny implementation of the reactive store functionality with no dependencies",
   "main": "dist/index.js",
@@ -12,7 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:n0th1ng-else/micro-store.git"
+    "url": "https://github.com/n0th1ng-else/minimal-store"
+  },
+  "bugs": {
+    "url": "https://github.com/n0th1ng-else/minimal-store/issues"
   },
   "keywords": [
     "store",
