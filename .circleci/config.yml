@@ -31,7 +31,6 @@ commands:
           path: test-report
 
 jobs:
-  version: 2.1
   semantic_release_pr:
     executor: node_executor
     steps:
@@ -44,7 +43,6 @@ jobs:
           command: npx semantic-release --dry-run --branch $CIRCLE_BRANCH | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
-    post-steps:
       - run: ./.circleci/aggregator.js
 
   semantic_release_master:
@@ -59,14 +57,12 @@ jobs:
           command: npx semantic-release | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
-    post-steps:
       - run: ./.circleci/aggregator.js
 
   run_unit_tests:
     executor: node_executor
     steps:
       - run_tests
-    post-steps:
       - run: ./.circleci/aggregator.js
 
   github_comment:
@@ -76,7 +72,7 @@ jobs:
       - run: ./.circleci/bot.js
 
 workflows:
-  version: 2.1
+  version: 2
 
   test_and_release:
     jobs:
