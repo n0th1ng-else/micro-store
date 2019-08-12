@@ -75,7 +75,7 @@ jobs:
       - run: ./.circleci/bot.js
 
 workflows:
-  version: 2
+  version: 2.1
 
   test_and_release:
     jobs:
