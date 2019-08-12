@@ -1,0 +1,38 @@
+{
+  "name": "micro-store",
+  "version": "0.0.0-semantically-released",
+  "description": "Tiny implementation of the reactive store functionality with no dependencies",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write --config prettierrc.js '**/*.+(js|json|ts|md|yml)'",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:n0th1ng-else/micro-store.git"
+  },
+  "keywords": [
+    "store",
+    "subscribe",
+    "reactive"
+  ],
+  "author": "Sergey Nikitin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "24.0.17",
+    "circle-github-bot": "2.0.1",
+    "eslint": "6.1.0",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "jest": "24.8.0",
+    "jest-cli": "24.8.0",
+    "jest-html-reporters": "1.1.8",
+    "prettier": "1.18.2",
+    "semantic-release": "15.13.19",
+    "ts-jest": "24.0.2",
+    "typescript": "3.5.3"
+  }
+}
