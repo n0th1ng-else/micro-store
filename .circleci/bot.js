@@ -8,6 +8,9 @@ bot.comment(
 <h3>${bot.commitMessage()}</h3>
 <div>Coverage: <strong>${bot.artifactLink('coverage/index.html', 'report')}</strong></div>
 <div>Test results: <strong>${bot.artifactLink('test-report/index.html', 'report')}</strong></div>
-
+<div>Semantic release info: <strong>${bot.artifactLink(
+		'semantic-release/index.log',
+		'log'
+	)}</strong></div>
 `
 );

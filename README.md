@@ -1,6 +1,6 @@
-# micro-store
+# minimal-store
 
-Minimalistic implementation of the reactive pattern store.
+Minimalistic implementation of the reactive store pattern
 
 ## Usage
 
@@ -29,7 +29,7 @@ All stores apply weak data i.e. you can use `null` (update with no value) to cle
 - Simple example:
 
 ```
-import { readableStore } from 'micro-store';
+import { readableStore } from 'minimal-store';
 
 const pageSize = readableStore(20);
 
@@ -45,7 +45,7 @@ pageSize.update(oldValue => {
 - freezable store:
 
 ```
-import { freezableStore } from 'micro-store';
+import { freezableStore } from 'minimal-store';
 
 const pageSize = freezableStore(20, 3);
 
@@ -61,7 +61,7 @@ pageSize.update(oldValue => {
 - Promise-like update:
 
 ```
-import { writableStore } from 'micro-store';
+import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
@@ -78,7 +78,7 @@ pageSize.update(oldValue => {
 - Handling update errors:
 
 ```
-import { writableStore } from 'micro-store';
+import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
@@ -98,7 +98,7 @@ pageSize.update(oldValue => {
 - Use current value to update store:
 
 ```
-import { writableStore } from 'micro-store';
+import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
