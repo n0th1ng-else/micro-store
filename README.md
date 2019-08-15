@@ -2,6 +2,10 @@
 
 Minimalistic implementation of the reactive store pattern
 
+# Badges
+
+[![CircleCI](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master.svg?style=svg)](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master)
+
 ## Usage
 
 There are differend kinds of store you can use:
