@@ -26,7 +26,7 @@ export const freezableStore = <D>(item: WeakData<D> = null, freezeCount = 1) => 
 
 	return {
 		update(handler: DataHandler<D>): Promise<void> {
-			callCounter++;
+			callCounter += 1;
 			if (callCounter > freezeCount) {
 				store.unsubscribeAll();
 				return Promise.resolve();

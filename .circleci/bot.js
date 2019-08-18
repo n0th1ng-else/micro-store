@@ -23,7 +23,7 @@ Promise.all(builds.map(bld => getBuildData(vcs, username, repo, bld, tkn)))
 
 		const coverage = arts.find(ar => /coverage/.test(ar));
 		const test = arts.find(ar => /test-report/.test(ar));
-		const release = arts.find(ar => /emantic-release/.test(ar));
+		const release = arts.find(ar => /semantic-release/.test(ar));
 
 		return comment(ghtkn, coverage, test, release);
 	})

@@ -37,8 +37,5 @@ export function updateStore<D>(
 ): Promise<void> {
 	return Promise.resolve()
 		.then(() => handler(item))
-		.then(change => {
-			item = change;
-			notify(item, subscriptions);
-		});
+		.then(change => notify(change, subscriptions));
 }
