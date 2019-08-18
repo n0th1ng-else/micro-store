@@ -1,4 +1,9 @@
 version: 2.1
+executors:
+  node_executor:
+    docker:
+      - image: circleci/node:10.15.3-browsers
+
 commands:
   install_dependencies:
     description: 'Checkout, install and cache npm dependencies'
@@ -24,11 +29,29 @@ commands:
           path: coverage
       - store_artifacts:
           path: test-report
+  persist_job:
+    description: 'Collect job number through the workflow'
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: mkdir -p /tmp/workspace
+      - run: echo -n "$CIRCLE_BUILD_NUM " >> /tmp/workspace/jobs.log
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - jobs.log
+  get_job_numbers:
+    description: 'Get workflow job numbers'
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: |
+          cat /tmp/workspace/jobs.log
+          echo 'export CIRCLE_CI_WORKFLOW_BUILDS="$(cat /tmp/workspace/jobs.log)"' >> $BASH_ENV
 
 jobs:
   semantic_release_pr:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
       - run:
@@ -39,10 +62,10 @@ jobs:
           command: npx semantic-release --dry-run --branch $CIRCLE_BRANCH 2>&1 | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
+      - persist_job
 
   semantic_release_master:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
       - run:
@@ -55,16 +78,16 @@ jobs:
           path: semantic-release
 
   run_unit_tests:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - run_tests
+      - persist_job
 
   github_comment:
-    docker:
-      - image: circleci/node:10.15.3-browsers
+    executor: node_executor
     steps:
       - install_dependencies
+      - get_job_numbers
       - run: ./.circleci/bot.js
 
 workflows:
@@ -88,6 +111,7 @@ workflows:
             branches:
               only: /^(?!master$).*/
       - github_comment:
+          context: CIRCLECI
           requires:
             - run_unit_tests
             - semantic_release_pr

@@ -2,6 +2,10 @@
 
 Minimalistic implementation of the reactive store pattern
 
+# Badges
+
+[![CircleCI](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master.svg?style=svg)](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master)
+
 ## Usage
 
 There are differend kinds of store you can use:
@@ -28,85 +32,86 @@ All stores apply weak data i.e. you can use `null` (update with no value) to cle
 
 - Simple example:
 
-```
+```js
 import { readableStore } from 'minimal-store';
 
 const pageSize = readableStore(20);
 
 pageSize.subscribe(size => {
-    // do something with _size_
+	// do something with _size_
 });
 
 pageSize.update(oldValue => {
-    // pageSize will never be update as it is a readableStore
+	// pageSize will never be update as it is a readableStore
 });
 ```
 
 - freezable store:
 
-```
+```js
 import { freezableStore } from 'minimal-store';
 
 const pageSize = freezableStore(20, 3);
 
 pageSize.subscribe(size => {
-    // do something with _size_
+	// do something with _size_
 });
 
 pageSize.update(oldValue => {
-    // pageSize will be updated first 3 times and then will be freezed
+	// pageSize will be updated first 3 times and then will be freezed
 });
 ```
 
 - Promise-like update:
 
-```
+```js
 import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
 pageSize.subscribe(size => {
-    // do something with _size_
+	// do something with _size_
 });
 
 pageSize.update(oldValue => {
-    // update function can be async!
-    return Promise.resolve(100);
+	// update function can be async!
+	return Promise.resolve(100);
 });
 ```
 
 - Handling update errors:
 
-```
+```js
 import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
 pageSize.subscribe(size => {
-    // do something with _size_
+	// do something with _size_
 });
 
-pageSize.update(oldValue => {
-    // update function can be async!
-    return Promise.reject(new Error('Something went wrong...'));
-})
-.catch(err => {
-    // err.message === 'Something went wrong...'
-});
+pageSize
+	.update(oldValue => {
+		// update function can be async!
+		return Promise.reject(new Error('Something went wrong...'));
+	})
+	.catch(err => {
+		// err.message === 'Something went wrong...'
+	});
 ```
 
 - Use current value to update store:
 
-```
+```js
 import { writableStore } from 'minimal-store';
 
 const pageSize = writableStore(20);
 
 pageSize.subscribe(size => {
-    // do something with _size_
+	// do something with _size_
 });
 
-pageSize.update(oldSize => {
-    return oldSize + 10;
+pageSize.update(oldValue => {
+	return oldValue + 10;
 });
 ```
