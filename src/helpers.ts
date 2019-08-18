@@ -1,9 +1,14 @@
 import { WeakData, DataSubscription, DataSubscriber, DataHandler } from './types';
 
-export function notify<D>(item: WeakData<D>, subscriptions: Array<DataSubscription<D>>): void {
+export function notify<D>(
+	item: WeakData<D>,
+	subscriptions: Array<DataSubscription<D>>
+): WeakData<D> {
 	subscriptions.forEach(handler => {
 		handler.subscription(item);
 	});
+
+	return item;
 }
 
 export function subscribeStore<D>(
@@ -34,7 +39,7 @@ export function updateStore<D>(
 	item: WeakData<D>,
 	subscriptions: Array<DataSubscription<D>>,
 	handler: DataHandler<D>
-): Promise<void> {
+): Promise<WeakData<D>> {
 	return Promise.resolve()
 		.then(() => handler(item))
 		.then(change => notify(change, subscriptions));

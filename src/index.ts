@@ -3,13 +3,16 @@ import { updateStore, subscribeStore, unsubscribeStore } from './helpers';
 
 export const writableStore = <D>(item: WeakData<D> = null) => {
 	let subscribers: Array<DataSubscription<D>> = [];
+	let storedVal = item;
 
 	return {
 		update(handler: DataHandler<D>): Promise<void> {
-			return updateStore(item, subscribers, handler);
+			return updateStore(storedVal, subscribers, handler).then(newValue => {
+				storedVal = newValue;
+			});
 		},
 		subscribe(subscription: DataSubscriber<D>): void {
-			return subscribeStore(item, subscribers, subscription);
+			return subscribeStore(storedVal, subscribers, subscription);
 		},
 		unsubscribe(subscription: DataSubscriber<D>): void {
 			subscribers = unsubscribeStore(subscribers, subscription);
@@ -28,15 +31,18 @@ export const freezableStore = <D>(item: WeakData<D> = null, freezeCount = 1) => 
 		update(handler: DataHandler<D>): Promise<void> {
 			callCounter += 1;
 			if (callCounter > freezeCount) {
-				store.unsubscribeAll();
 				return Promise.resolve();
 			}
-			return store.update(handler);
+			return store.update(handler).then(() => {
+				if (callCounter === freezeCount) {
+					store.unsubscribeAll();
+				}
+			});
 		},
 		subscribe(subscription: DataSubscriber<D>): void {
 			store.subscribe(subscription);
 
-			if (callCounter > freezeCount) {
+			if (callCounter >= freezeCount) {
 				store.unsubscribe(subscription);
 			}
 		},
