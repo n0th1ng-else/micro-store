@@ -6,9 +6,10 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write --config prettierrc.js '**/*.+(js|json|ts|md|yml)'",
+    "format": "prettier --write '**/*.+(js|json|ts|md|yml)'",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "lint": "eslint . --ext .js,.ts"
   },
   "repository": {
     "type": "git",
@@ -26,10 +27,15 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "24.0.17",
+    "@typescript-eslint/eslint-plugin": "2.0.0",
+    "@typescript-eslint/parser": "2.0.0",
     "circle-github-bot": "2.0.1",
     "eslint": "6.1.0",
+    "eslint-config-airbnb-base": "14.0.0",
     "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-import": "2.18.2",
     "eslint-plugin-prettier": "3.1.0",
+    "husky": "3.0.4",
     "jest": "24.8.0",
     "jest-cli": "24.8.0",
     "jest-html-reporters": "1.1.8",
@@ -37,5 +43,10 @@
     "semantic-release": "15.13.19",
     "ts-jest": "24.0.2",
     "typescript": "3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test"
+    }
   }
 }
