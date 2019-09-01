@@ -25,6 +25,9 @@ commands:
       - run:
           name: Run Tests
           command: npm test
+      - run:
+          name: Upload to codecov
+          command: npx codecov
       - store_artifacts:
           path: coverage
       - store_artifacts:
@@ -95,7 +98,8 @@ workflows:
 
   test_and_release:
     jobs:
-      - run_unit_tests
+      - run_unit_tests:
+          context: CODECOV
       - semantic_release_master:
           context: NPM
           requires:
