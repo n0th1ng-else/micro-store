@@ -3,7 +3,7 @@ module.exports = {
 	transform: {
 		'^.+\\.tsx?$': 'ts-jest'
 	},
-	coverageReporters: ['text-summary', 'html'],
+	coverageReporters: ['text-summary', 'html', 'lcov'],
 	reporters: [
 		'default',
 		['jest-html-reporters', { publicPath: './test-report', filename: 'index.html' }]
