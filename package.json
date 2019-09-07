@@ -4,6 +4,11 @@
   "description": "Tiny implementation of the reactive store functionality with no dependencies",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.+(js|json|ts|md|yml)'",

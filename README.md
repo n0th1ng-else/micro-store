@@ -4,13 +4,18 @@ Minimalistic implementation of the reactive store pattern
 
 # Badges
 
-[![CircleCI](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master.svg?style=svg)](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master)
 
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![circle ci](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master.svg?style=svg)](https://circleci.com/gh/n0th1ng-else/minimal-store/tree/master)
 
-<img alt="npm version badge" src="https://img.shields.io/npm/v/minimal-store">
+[![semantic release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-<img alt="code coverage badge" src="https://img.shields.io/codecov/c/github/n0th1ng-else/minimal-store">
+[![npm version](https://img.shields.io/npm/v/minimal-store)](https://www.npmjs.com/package/minimal-store)
+
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://jestjs.io)
+
+[![codecov](https://img.shields.io/codecov/c/github/n0th1ng-else/minimal-store)](https://codecov.io/gh/n0th1ng-else/minimal-store)
+
+[![install size](https://packagephobia.now.sh/badge?p=minimal-store)](https://packagephobia.now.sh/result?p=minimal-store)
 
 ## Usage
 

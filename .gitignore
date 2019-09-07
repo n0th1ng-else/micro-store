@@ -5,3 +5,4 @@ dist
 coverage
 test-report
 semantic-release
+.npmrc
