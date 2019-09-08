@@ -62,7 +62,7 @@ jobs:
           command: mkdir -p semantic-release
       - run:
           name: Semantic-release dry run
-          command: npx semantic-release --dry-run --branch $CIRCLE_BRANCH 2>&1 | tee semantic-release/index.log
+          command: unset CIRCLE_PR_NUMBER && unset CIRCLE_PULL_REQUEST && unset CI_PULL_REQUEST && npx semantic-release --dry-run --branch ${CIRCLE_BRANCH} 2>&1 | tee semantic-release/index.log
       - store_artifacts:
           path: semantic-release
       - persist_job

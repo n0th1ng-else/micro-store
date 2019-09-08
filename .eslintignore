@@ -1,8 +1,6 @@
-node_modules
 .DS_STORE
 .idea
 dist
 coverage
 test-report
 semantic-release
-.npmrc
