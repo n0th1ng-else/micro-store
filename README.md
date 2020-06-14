@@ -1,6 +1,11 @@
 # minimal-store
 
-Minimalistic implementation of the reactive store pattern
+Minimalistic implementation of the **reactive store** pattern
+
+- **322 Bytes**, according to [size-limit](https://github.com/ai/size-limit/)
+- **No** dependencies
+- **100% test** coverage
+- ES Module
 
 # Badges
 
@@ -13,8 +18,6 @@ Minimalistic implementation of the reactive store pattern
 [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://jestjs.io)
 
 [![codecov](https://img.shields.io/codecov/c/github/n0th1ng-else/minimal-store)](https://codecov.io/gh/n0th1ng-else/minimal-store)
-
-[![install size](https://packagephobia.now.sh/badge?p=minimal-store)](https://packagephobia.now.sh/result?p=minimal-store)
 
 ## Usage
 
@@ -36,11 +39,28 @@ All stores apply weak data i.e. you can use `null` (update with no value) to cle
 
 ### readableStore
 
-`readableStore` stores the initial value and never being updated.
+`readableStore` stores the initial value and never being updated.  
+All subscribers will be executed once with the value store contains.
 
 ## Examples
 
 - Simple example:
+
+```js
+import { writableStore } from 'minimal-store';
+
+const pageSize = writableStore(20);
+
+pageSize.subscribe(size => {
+	// do something with _size_
+	// subscription will be called with `size === 20`
+	// then with `size === 21`
+});
+
+pageSize.update(oldValue => oldValue + 1);
+```
+
+- readable store
 
 ```js
 import { readableStore } from 'minimal-store';
@@ -53,6 +73,7 @@ pageSize.subscribe(size => {
 
 pageSize.update(oldValue => {
 	// pageSize will never be update as it is a readableStore
+	// return value does not make any sense in this case
 });
 ```
 
@@ -61,7 +82,8 @@ pageSize.update(oldValue => {
 ```js
 import { freezableStore } from 'minimal-store';
 
-const pageSize = freezableStore(20, 3);
+const freezeCount = 3;
+const pageSize = freezableStore(20, freezeCount);
 
 pageSize.subscribe(size => {
 	// do something with _size_
@@ -69,6 +91,8 @@ pageSize.subscribe(size => {
 
 pageSize.update(oldValue => {
 	// pageSize will be updated first 3 times and then will be freezed
+	const newValue = 21; // any value you want to return
+	return newValue;
 });
 ```
 
@@ -81,6 +105,8 @@ const pageSize = writableStore(20);
 
 pageSize.subscribe(size => {
 	// do something with _size_
+	// first time it receives `size === 20`
+	// then `size === 100`
 });
 
 pageSize.update(oldValue => {
@@ -124,4 +150,20 @@ pageSize.subscribe(size => {
 pageSize.update(oldValue => {
 	return oldValue + 10;
 });
+```
+
+- Store rely on weak data i.e. you always can pass **null** as a new value:
+
+```js
+import { writableStore } from 'minimal-store';
+
+const pageSize = writableStore(20);
+
+pageSize.subscribe(size => {
+	// do something with _size_
+	// first time `size === 20`
+	// next `size === null`
+});
+
+pageSize.update(oldValue => null);
 ```
