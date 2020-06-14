@@ -183,6 +183,28 @@ describe('Store tests', () => {
 				.then(() => done());
 		});
 
+		it('never changes value when freezed', done => {
+			const initial = 'my';
+			const val = 'test';
+			const store = freezableStore<string>(initial);
+
+			const handler = jest
+				.fn()
+				.mockImplementationOnce(data => expect(data).toBe(initial))
+				.mockImplementationOnce(data => expect(data).toBe(val))
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
+
+			store.subscribe(handler);
+
+			store
+				.update(() => val)
+				.then(() => store.update(() => 'another one'))
+				.then(() => store.update(() => 'all new'))
+				.then(() => done());
+		});
+
 		it('can change value only twice as set in param', done => {
 			const initial = 'my';
 			const second = 'test';
