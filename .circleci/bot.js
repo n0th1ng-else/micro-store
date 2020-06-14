@@ -85,7 +85,9 @@ function comment(token, coverage, test, release) {
 	}
 
 	if (release) {
-		body += `<div>Semantic release info: <strong>${getLink(release)}</strong></div>`;
+		body += `<div>Semantic release info: <strong>${getLink(
+			release
+		)}</strong></div>`;
 	}
 
 	bot.comment(token, body);
