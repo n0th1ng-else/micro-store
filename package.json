@@ -11,10 +11,12 @@
   ],
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write '**/*.+(js|json|ts|md|yml)'",
-    "test": "jest --coverage",
-    "test:watch": "jest --watch",
-    "lint": "eslint . --ext .js,.ts"
+    "size": "size-limit",
+    "format": "prettier --write",
+    "test": "jest",
+    "coverage": "jest --collect-coverage",
+    "test:watch": "jest --watch --silent=false",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -31,26 +33,45 @@
   "author": "Sergey Nikitin <srg.post@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "25.2.1",
-    "@typescript-eslint/eslint-plugin": "2.26.0",
-    "@typescript-eslint/parser": "2.26.0",
-    "circle-github-bot": "2.0.1",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb-base": "14.1.0",
-    "eslint-config-prettier": "6.10.1",
-    "eslint-plugin-import": "2.20.2",
-    "eslint-plugin-prettier": "3.1.2",
-    "husky": "4.2.3",
-    "jest": "25.2.7",
-    "jest-cli": "25.2.7",
+    "@size-limit/preset-small-lib": "4.5.0",
+    "@types/jest": "26.0.0",
+    "@typescript-eslint/eslint-plugin": "3.2.0",
+    "@typescript-eslint/parser": "3.2.0",
+    "circle-github-bot": "2.1.0",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-import": "2.21.2",
+    "eslint-plugin-prettier": "3.1.3",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
+    "jest-cli": "26.0.1",
     "jest-html-reporters": "1.2.1",
-    "prettier": "2.0.2",
-    "ts-jest": "25.3.1",
-    "typescript": "3.8.3"
+    "lint-staged": "10.2.10",
+    "prettier": "2.0.5",
+    "size-limit": "4.5.0",
+    "ts-jest": "26.1.0",
+    "typescript": "3.9.5"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm test"
+      "pre-commit": "lint-staged"
     }
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "500 B"
+    }
+  ],
+  "lint-staged": {
+    "*.{md,yml,json}": [
+      "npm run format"
+    ],
+    "*.{js,ts}": [
+      "npm run format",
+      "npm run lint",
+      "npm test"
+    ]
   }
 }

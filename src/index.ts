@@ -1,4 +1,9 @@
-import { WeakData, DataSubscription, DataSubscriber, DataHandler } from './types';
+import {
+	WeakData,
+	DataSubscription,
+	DataSubscriber,
+	DataHandler
+} from './types';
 import { updateStore, subscribeStore, unsubscribeStore } from './helpers';
 
 export const writableStore = <D>(item: WeakData<D> = null) => {
@@ -23,7 +28,10 @@ export const writableStore = <D>(item: WeakData<D> = null) => {
 	};
 };
 
-export const freezableStore = <D>(item: WeakData<D> = null, freezeCount = 1) => {
+export const freezableStore = <D>(
+	item: WeakData<D> = null,
+	freezeCount = 1
+) => {
 	const store = writableStore(item);
 	let callCounter = 0;
 

@@ -6,6 +6,9 @@ module.exports = {
 	coverageReporters: ['text-summary', 'html', 'lcov'],
 	reporters: [
 		'default',
-		['jest-html-reporters', { publicPath: './test-report', filename: 'index.html' }]
+		[
+			'jest-html-reporters',
+			{ publicPath: './test-report', filename: 'index.html' }
+		]
 	]
 };

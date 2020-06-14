@@ -75,7 +75,9 @@ describe('Store tests', () => {
 				const handler = jest
 					.fn()
 					.mockImplementationOnce(data => expect(data).toBeNull())
-					.mockImplementationOnce(() => done.fail(new Error('handler must not be called!')));
+					.mockImplementationOnce(() =>
+						done.fail(new Error('handler must not be called!'))
+					);
 
 				store.subscribe(handler);
 
@@ -132,7 +134,9 @@ describe('Store tests', () => {
 			const handler = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBeNull())
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store.subscribe(handler);
 
@@ -147,7 +151,9 @@ describe('Store tests', () => {
 			const handler = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store.subscribe(handler);
 
@@ -165,7 +171,9 @@ describe('Store tests', () => {
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
 				.mockImplementationOnce(data => expect(data).toBe(val))
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store.subscribe(handler);
 
@@ -187,7 +195,9 @@ describe('Store tests', () => {
 				.mockImplementationOnce(data => expect(data).toBe(initial))
 				.mockImplementationOnce(data => expect(data).toBe(second))
 				.mockImplementationOnce(data => expect(data).toBe(final))
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store.subscribe(handler);
 
@@ -208,7 +218,9 @@ describe('Store tests', () => {
 			const handler = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(final))
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store
 				.update(() => second)
@@ -226,12 +238,16 @@ describe('Store tests', () => {
 			const handler1 = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
-				.mockImplementationOnce(() => done.fail(new Error('handler must not be called!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('handler must not be called!'))
+				);
 
 			const handler2 = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
-				.mockImplementationOnce(() => done.fail(new Error('handler must not be called!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('handler must not be called!'))
+				);
 
 			store.subscribe(handler1);
 			store.subscribe(handler2);
@@ -250,12 +266,16 @@ describe('Store tests', () => {
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
 				.mockImplementationOnce(data => expect(data).toBe(second))
-				.mockImplementationOnce(() => done.fail(new Error('handler must not be called!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('handler must not be called!'))
+				);
 
 			const handler2 = jest
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBe(initial))
-				.mockImplementationOnce(() => done.fail(new Error('handler must not be called!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('handler must not be called!'))
+				);
 
 			store.subscribe(handler1);
 			store.subscribe(handler2);
@@ -273,7 +293,9 @@ describe('Store tests', () => {
 				.fn()
 				.mockImplementationOnce(data => expect(data).toBeNull())
 				.mockImplementationOnce(data => expect(data).toBe(second))
-				.mockImplementationOnce(() => done.fail(new Error('store can not be changed!')));
+				.mockImplementationOnce(() =>
+					done.fail(new Error('store can not be changed!'))
+				);
 
 			store.subscribe(handler1);
 

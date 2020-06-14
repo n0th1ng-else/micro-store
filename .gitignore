@@ -6,3 +6,4 @@ coverage
 test-report
 semantic-release
 .npmrc
+package-lock.json
