@@ -1,4 +1,4 @@
-import {
+import type {
 	WeakData,
 	DataSubscriber,
 	DataHandler,

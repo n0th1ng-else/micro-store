@@ -1,4 +1,4 @@
-import { WeakData, DataSubscriber } from './types';
+import type { WeakData, DataSubscriber } from './types';
 
 export function notifySubscribers<D>(
 	item: WeakData<D>,
